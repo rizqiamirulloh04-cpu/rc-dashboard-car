@@ -26,26 +26,14 @@ void setup()
 
     gfx->begin();
 
-    // BLACK
-    gfx->fillScreen(0x0000);
+    gfx->fillScreen(BLACK);
+    gfx->setTextColor(WHITE);
+    gfx->setTextSize(2);
 
     gfx->setCursor(20, 40);
+    gfx->println("ESP32-C6 OK");
 
-    // WHITE
-    gfx->setTextColor(0xFFFF);
-
-    gfx->setTextSize(2);
-    gfx->println("ESP32-C6");
-
-    gfx->setCursor(20, 80);
-
-    // GREEN
-    gfx->setTextColor(0x07E0);
-
-    gfx->println("LCD TEST OK");
-
-    // RED
-    gfx->fillRect(20, 140, 120, 30, 0xF800);
+    gfx->fillRect(20, 100, 100, 40, RED);
 }
 
 void loop()
