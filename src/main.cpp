@@ -1,28 +1,22 @@
 #include <Arduino.h>
 #include <Arduino_GFX_Library.h>
 
-#define TFT_MOSI 6
-#define TFT_SCLK 7
-#define TFT_CS   14
-#define TFT_DC   15
-#define TFT_RST  21
-#define TFT_BL   22
+#define TFT_BL 22
 
 Arduino_DataBus *bus = new Arduino_ESP32SPI(
-    TFT_DC,
-    TFT_CS,
-    TFT_SCLK,
-    TFT_MOSI,
-    -1
+    15, // DC
+    14, // CS
+    7,  // SCK
+    6,  // MOSI
+    -1  // MISO
 );
 
 Arduino_GFX *gfx = new Arduino_ST7789(
     bus,
-    TFT_RST,
-    0,
-    true,
-    172,
-    320
+    21,   // RST
+    0,    // rotation
+    true, // IPS
+    172, 320
 );
 
 void setup()
@@ -32,19 +26,26 @@ void setup()
 
     gfx->begin();
 
-    gfx->fillScreen(BLACK);
-
-    gfx->setTextColor(WHITE);
-    gfx->setTextSize(2);
+    // BLACK
+    gfx->fillScreen(0x0000);
 
     gfx->setCursor(20, 40);
+
+    // WHITE
+    gfx->setTextColor(0xFFFF);
+
+    gfx->setTextSize(2);
     gfx->println("ESP32-C6");
 
-    gfx->setTextColor(GREEN);
     gfx->setCursor(20, 80);
-    gfx->println("DISPLAY OK");
 
-    gfx->fillRect(20, 140, 120, 30, RED);
+    // GREEN
+    gfx->setTextColor(0x07E0);
+
+    gfx->println("LCD TEST OK");
+
+    // RED
+    gfx->fillRect(20, 140, 120, 30, 0xF800);
 }
 
 void loop()
