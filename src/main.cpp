@@ -13,10 +13,11 @@ Arduino_DataBus *bus = new Arduino_ESP32SPI(
 
 Arduino_GFX *gfx = new Arduino_ST7789(
     bus,
-    21,   // RST
-    0,    // rotation
-    true, // IPS
-    172, 320
+    21,
+    0,
+    true,
+    172,
+    320
 );
 
 void setup()
@@ -26,14 +27,15 @@ void setup()
 
     gfx->begin();
 
-    gfx->fillScreen(BLACK);
-    gfx->setTextColor(WHITE);
+    gfx->fillScreen(0x0000);
+
+    gfx->setTextColor(0xFFFF);
     gfx->setTextSize(2);
 
     gfx->setCursor(20, 40);
     gfx->println("ESP32-C6 OK");
 
-    gfx->fillRect(20, 100, 100, 40, RED);
+    gfx->fillRect(20, 100, 100, 40, 0xF800);
 }
 
 void loop()
