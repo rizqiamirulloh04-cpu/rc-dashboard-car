@@ -22,11 +22,9 @@ jobs:
       - name: Build Firmware
         run: pio run
 
-      - name: Upload firmware
+      - name: Upload Firmware
         uses: actions/upload-artifact@v4
         with:
-          name: esp32-c6-firmware
+          name: firmware-bin
           path: |
-            .pio/build/esp32-c6-devkitm-1/firmware.bin
-            .pio/build/esp32-c6-devkitm-1/bootloader.bin
-            .pio/build/esp32-c6-devkitm-1/partitions.bin
+            .pio/build/*/*.bin
