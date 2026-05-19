@@ -1,21 +1,23 @@
 #include <Arduino.h>
 #include <Arduino_GFX_Library.h>
 
+// SPI bus
 Arduino_DataBus *bus = new Arduino_ESP32SPI(
-    8,   // DC
-    7,   // CS
-    6,   // SCK
-    10,  // MOSI
-    -1
+    15, // DC
+    14, // CS
+    7,  // SCK
+    6,  // MOSI
+    -1  // MISO
 );
 
+// Display ST7789
 Arduino_GFX *gfx = new Arduino_ST7789(
     bus,
-    3,
-    1,
-    true,
-    172,
-    320
+    21,   // RST
+    1,    // rotation
+    true, // IPS
+    172,  // width
+    320   // height
 );
 
 void setup()
@@ -30,13 +32,16 @@ void setup()
     gfx->setTextColor(GREEN);
     gfx->setTextSize(2);
 
-    gfx->setCursor(30, 40);
+    gfx->setCursor(25, 40);
     gfx->println("RC DASHBOARD");
 
     gfx->setCursor(50, 80);
     gfx->println("ESP32-C6");
 
+    // Bar outline
     gfx->drawRect(20, 140, 280, 30, WHITE);
+
+    // Fill bar
     gfx->fillRect(20, 140, 180, 30, GREEN);
 
     gfx->setCursor(90, 190);
