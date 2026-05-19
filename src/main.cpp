@@ -1,6 +1,10 @@
 #include <Arduino.h>
 #include <Arduino_GFX_Library.h>
 
+#define BLACK 0x0000
+#define WHITE 0xFFFF
+#define GREEN 0x07E0
+
 // SPI bus
 Arduino_DataBus *bus = new Arduino_ESP32SPI(
     15, // DC
