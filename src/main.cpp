@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include <LovyanGFX.hpp>
+#include <Arduino_GFX_Library.h>
 
 class LGFX : public lgfx::LGFX_Device {
     lgfx::Panel_ST7789 _panel;
