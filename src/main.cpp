@@ -1,62 +1,28 @@
 #include <Arduino.h>
-#include <Arduino_GFX_Library.h>
+#include <TFT_eSPI.h>
 
-#define TFT_BL 15
-
-// SPI LCD Waveshare ESP32-C6 1.47
-Arduino_DataBus *bus = new Arduino_ESP32SPI(
-    6,   // DC
-    7,   // CS
-    10,  // SCK
-    11,  // MOSI
-    -1   // MISO
-);
-
-// ST7789 172x320
-Arduino_GFX *gfx = new Arduino_ST7789(
-    bus,
-    14,   // RST
-    0,    // rotation
-    true,
-    172,
-    320,
-    34,
-    0,
-    34,
-    0
-);
+TFT_eSPI tft = TFT_eSPI();
 
 void setup()
 {
-    pinMode(TFT_BL, OUTPUT);
-    digitalWrite(TFT_BL, HIGH);
+    pinMode(22, OUTPUT);
+    digitalWrite(22, HIGH);
 
-    gfx->begin();
+    tft.init();
+    tft.setRotation(1);
 
-    // Hitam
-    gfx->fillScreen(0x0000);
+    tft.fillScreen(TFT_BLACK);
 
-    // Putih
-    gfx->setTextColor(0xFFFF);
+    tft.setTextColor(TFT_GREEN);
+    tft.setTextSize(2);
 
-    gfx->setTextSize(2);
+    tft.drawString("RC DASHBOARD", 20, 40);
+    tft.drawString("ESP32-C6", 40, 80);
 
-    gfx->setCursor(20, 40);
-    gfx->println("LCD TEST");
+    tft.drawRect(20, 140, 280, 30, TFT_WHITE);
+    tft.fillRect(20, 140, 180, 30, TFT_GREEN);
 
-    gfx->setTextSize(1);
-
-    gfx->setCursor(20, 80);
-    gfx->println("ESP32-C6 WAVESHARE");
-
-    // Merah
-    gfx->fillRect(20, 140, 120, 40, 0xF800);
-
-    // Hijau
-    gfx->fillRect(20, 200, 120, 40, 0x07E0);
-
-    // Biru
-    gfx->fillRect(20, 260, 120, 40, 0x001F);
+    tft.drawString("Throttle", 90, 190);
 }
 
 void loop()
